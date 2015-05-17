@@ -1,0 +1,13 @@
+﻿<Properties StartupItem="OnePointOh\HeatWarning.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="OnePointOh\HeatWarning.cs">
+    <Files>
+      <File FileName="OnePointOh\HeatWarning.cs" Line="102" Column="4" />
+      <File FileName="OnePointOh\HeatWarningUI.cs" Line="203" Column="4" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
