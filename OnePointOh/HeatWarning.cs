@@ -768,12 +768,6 @@ namespace HeatWarning{
 				}
 			}
 		}
-		/*
-		 * TODO: Create a general add alert button method to avoid having the same code twice.
-		 */
-		private void addAlertButton(Texture2D Texture, Callback onClick)
-		{
-		}
 		/* Default placeholder */
 		private void onBtnHover()
 		{
