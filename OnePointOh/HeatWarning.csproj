@@ -43,6 +43,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HeatWarning.cs" />
     <Compile Include="HeatWarningUI.cs" />
+    <Compile Include="ThermometerBase.cs" />
+    <Compile Include="LinearThermometer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

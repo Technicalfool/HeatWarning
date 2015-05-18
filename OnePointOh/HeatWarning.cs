@@ -174,9 +174,7 @@ namespace HeatWarning{
 			thermometerFGStyle.normal.background = thermometerFGTex;
 			thermometerFlashStyle.normal.background = thermometerFlashTex;
 			//Debug.Log("[HeatWarning] Waking up! Thermometers styled. Trying to make new List<T>.");
-			//thermometerStates = new List<ThermometerState>();
 			thermometerStates = new Dictionary<int, ThermometerState>();
-			//Debug.Log("[HeatWarning] Waking up! List<T> made.");
 
 			tempThreshold = 0.7;
 			flashThreshold = 0.9;
@@ -360,7 +358,7 @@ namespace HeatWarning{
 		}
 
 		/*
-		 * Render the screen-size map view pulse rect.
+		 * Render the screen-size map view pulse.
 		 */
 		private void drawMapViewPulse()
 		{
