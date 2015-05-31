@@ -3,43 +3,65 @@ using System;
 
 namespace HeatWarning
 {
-	public class ThermometerBase : MonoBehaviour
+	public enum ThermometerStates{
+		OPENING,
+		ACTIVE,
+		CLOSING,
+		INACTIVE
+	}
+	public class ThermometerBase
 	{
+		public ThermometerBase(Part p)
+		{
+			anchor = p;
+			state = new ThermometerStates();
+			state = ThermometerStates.INACTIVE;
+		}
+
 		/*
 		 * The thermometer is aligned around this part.
 		 */
 		protected Part anchor;
-		private float _currentRatio;
-		private float _startRatio;
-		private float _criticalRatio;
-		protected float currentRatio{
+		protected ThermometerStates _state;
+		protected float _currentRatio;
+		protected float _startRatio;
+		protected float _criticalRatio;
+
+		public ThermometerStates state{
+			get{
+				return _state;
+			}
+			protected set{
+				_state = value;
+			}
+		}
+
+		public float currentRatio{
 			get{
 				return _currentRatio;
 			}
-			set{
+			protected set{
 				_currentRatio = value;
 			}
 		}
-		protected float startRatio{
+		public float startRatio{
 			get{
 				return _startRatio;
 			}
-			set{
+			protected set{
 				_startRatio = value;
 			}
 		}
-		protected float criticalRatio{
+		public float criticalRatio{
 			get{
 				return _criticalRatio;
 			}
-			set{
+			protected set{
 				_criticalRatio = value;
 			}
 		}
 
-		public ThermometerBase ()
-		{
-		}
+
 
 		public virtual void draw();
 		/*
