@@ -9,7 +9,7 @@ namespace HeatWarning
 		CLOSING,
 		INACTIVE
 	}
-	public class ThermometerBase
+	public abstract class ThermometerBase
 	{
 		public ThermometerBase(Part p)
 		{
@@ -23,9 +23,9 @@ namespace HeatWarning
 		 */
 		protected Part anchor;
 		protected ThermometerStates _state;
-		protected float _currentRatio;
-		protected float _startRatio;
-		protected float _criticalRatio;
+		protected double _currentRatio;
+		protected double _startRatio;
+		protected double _criticalRatio;
 
 		public ThermometerStates state{
 			get{
@@ -36,7 +36,7 @@ namespace HeatWarning
 			}
 		}
 
-		public float currentRatio{
+		public double currentRatio{
 			get{
 				return _currentRatio;
 			}
@@ -44,7 +44,7 @@ namespace HeatWarning
 				_currentRatio = value;
 			}
 		}
-		public float startRatio{
+		public double startRatio{
 			get{
 				return _startRatio;
 			}
@@ -52,7 +52,7 @@ namespace HeatWarning
 				_startRatio = value;
 			}
 		}
-		public float criticalRatio{
+		public double criticalRatio{
 			get{
 				return _criticalRatio;
 			}
@@ -63,21 +63,21 @@ namespace HeatWarning
 
 
 
-		public virtual void draw();
+		public abstract void draw();
 		/*
 		 * If the thermometer has any starting animations, trigger
 		 * them in this method.
 		 */
-		public virtual void show();
+		public abstract void show();
 		/*
 		 * If the thermometer has any animations for closing, trigger
 		 * them in this method.
 		 */
-		public virtual void hide();
+		public abstract void hide();
 
 		protected void calculateBase()
 		{
-			_currentRatio = anchor.maxTemp / anchor.temperature;
+			_currentRatio = anchor.skinMaxTemp / anchor.skinTemperature;
 		}
 	}
 }

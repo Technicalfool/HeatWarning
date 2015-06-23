@@ -60,7 +60,8 @@ namespace HeatWarning
 			FlashTex.SetPixel(0,0,thermometerFlashCol);
 			FlashTex.Apply();
 			FlashStyle.normal.background = FlashTex;
-
+			flashPeriod = 300;
+			flashOnPeriod = 50;
 
 
 
@@ -98,8 +99,10 @@ namespace HeatWarning
 			{
 				case ThermometerStates.OPENING:
 					_tick_opening();
+					break;
 				case ThermometerStates.CLOSING:
 					_tick_closing();
+					break;
 			}
 			if (visible())
 			{
@@ -121,7 +124,7 @@ namespace HeatWarning
 				double minTemp = anchor.maxTemp * _startRatio;
 				double tempWidth = tempClipped - minTemp;
 				double widthScale = thermometerSize.width / (anchor.maxTemp - minTemp);
-				thermometerForeground.width = tempWidth * widthScale;
+				thermometerForeground.width = (float)(tempWidth * widthScale);
 				//Calculate flash.
 				if (thisTick - lastFlash > flashPeriod)
 				{
@@ -136,7 +139,7 @@ namespace HeatWarning
 				}
 			}
 		}
-		public void draw()
+		public override void draw()
 		{
 			/*
 			 * Render the outer border if any of these are true.
@@ -152,7 +155,7 @@ namespace HeatWarning
 			/*
 			 * Only need to do anything if visible.
 			 */
-			if (visible)
+			if (visible())
 			{
 				/*
 				 * Render background box.
@@ -164,13 +167,13 @@ namespace HeatWarning
 				GUI.DrawTexture(thermometerForeground, FGTex);
 			}
 		}
-		public void show()
+		public override void show()
 		{
 			Debug.Log("[HeatWarning] Showing thermometer for " + anchor.name);
 			_state = ThermometerStates.OPENING;
 			animationStarted = Time.realtimeSinceStartup;
 		}
-		public void hide()
+		public override void hide()
 		{
 			Debug.Log("[HeatWarning] Hiding thermometer for " + anchor.name);
 			_state = ThermometerStates.CLOSING;
@@ -189,8 +192,8 @@ namespace HeatWarning
 			double timeRatio = animationTime / (thisTick - animationStarted);
 			if (timeRatio <= 1.0)
 			{
-				thermometerCurrentSize.width = thermometerSize.width * timeRatio;
-				thermometerCurrentSize.height = thermometerSize.height * timeRatio;
+				thermometerCurrentSize.width = (float)(thermometerSize.width * timeRatio);
+				thermometerCurrentSize.height = (float)(thermometerSize.height * timeRatio);
 				thermometerOutlineSize.width = thermometerCurrentSize.width + 2;
 				thermometerOutlineSize.height = thermometerCurrentSize.height + 2;
 			}
@@ -207,8 +210,8 @@ namespace HeatWarning
 			double timeRatio = animationTime / (thisTick - animationStarted);
 			if (timeRatio <= 1.0)
 			{
-				thermometerCurrentSize.width = thermometerSize.width - (thermometerSize.width * timeRatio);
-				thermometerCurrentSize.height = thermometerSize.height - (thermometerSize.height * timeRatio);
+				thermometerCurrentSize.width = thermometerSize.width - (float)(thermometerSize.width * timeRatio);
+				thermometerCurrentSize.height = thermometerSize.height - (float)(thermometerSize.height * timeRatio);
 				thermometerOutlineSize.width = thermometerCurrentSize.width + 2;
 				thermometerOutlineSize.height = thermometerCurrentSize.height + 2;
 			}

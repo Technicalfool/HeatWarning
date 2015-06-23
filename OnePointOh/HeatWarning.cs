@@ -519,7 +519,7 @@ namespace HeatWarning{
 		private void calculateThermometer(Part p)
 		{
 			
-			double tempRatio = p.temperature / p.maxTemp;
+			double tempRatio = p.skinTemperature / p.skinMaxTemp;
 			if (tempRatio > tempThreshold) //Only display if ratio > threshold value.
 			{
 				overHeating = true;
@@ -527,15 +527,15 @@ namespace HeatWarning{
 				if (!inMapView && !inIVA)
 				{
 					//Limit temperature value to maxTemp.
-					double tempClipped = p.temperature;
-					if (tempClipped > p.maxTemp)
+					double tempClipped = p.skinTemperature;
+					if (tempClipped > p.skinMaxTemp)
 					{
-						tempClipped = p.maxTemp;
+						tempClipped = p.skinMaxTemp;
 					}
 					/*
 					 * Determine how wide the thermometer foreground should be.
 					 */
-					double minTemp = p.maxTemp * tempThreshold;
+					double minTemp = p.skinMaxTemp * tempThreshold;
 					double tempWidth = tempClipped - minTemp;
 					double widthScale = thermometerSize.width / (p.maxTemp - minTemp);
 					double scaledTempWidth = tempWidth * widthScale;
@@ -582,7 +582,7 @@ namespace HeatWarning{
 		/* Not used */
 		private void drawThermometer(Part p)
 		{
-			double tempRatio = p.temperature / p.maxTemp;
+			double tempRatio = p.skinTemperature / p.skinMaxTemp;
 			if (tempRatio > tempThreshold) //Only display if ratio > threshold value.
 			{
 				overHeating = true;
@@ -590,17 +590,17 @@ namespace HeatWarning{
 				if (!inMapView)
 				{
 					//Limit temperature value to maxTemp.
-					double tempClipped = p.temperature;
-					if (tempClipped > p.maxTemp)
+					double tempClipped = p.skinTemperature;
+					if (tempClipped > p.skinMaxTemp)
 					{
-						tempClipped = p.maxTemp;
+						tempClipped = p.skinMaxTemp;
 					}
 					/*
 					 * Determine how wide the thermometer foreground should be.
 					 */
-					double minTemp = p.maxTemp * tempThreshold;
+					double minTemp = p.skinMaxTemp * tempThreshold;
 					double tempWidth = tempClipped - minTemp;
-					double widthScale = thermometerSize.width / (p.maxTemp - minTemp);
+					double widthScale = thermometerSize.width / (p.skinMaxTemp - minTemp);
 					double scaledTempWidth = tempWidth * widthScale;
 
 					/*
