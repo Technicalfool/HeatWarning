@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -17,9 +18,10 @@ namespace HeatWarning
 	/*
 	 * The menu runs as its own plugin class.
 	 */
-	[KSPAddon(KSPAddon.Startup.EveryScene, false)]
+	[KSPAddon(KSPAddon.Startup.MainMenu, true)]
 	public class ListMenu : MonoBehaviour
 	{
+		private Timer tmrMakeButtonTimer;
 		private Rect size;
 		private int windowID;
 		private bool isActive;
@@ -38,7 +40,11 @@ namespace HeatWarning
 		public Dictionary<MenuOptions, MenuOption> getOptions{get{return options;}}
 		public ListMenu()
 		{
-
+			
+		}
+		public void Start()
+		{
+			DontDestroyOnLoad(this);
 		}
 		public void Awake()
 		{
@@ -66,7 +72,11 @@ namespace HeatWarning
 			}
 			isActive = false;
 
-			addButton();
+			tmrMakeButtonTimer = new System.Timers.Timer(500);
+			tmrMakeButtonTimer.Elapsed += addButtonEvent;
+			tmrMakeButtonTimer.Enabled = true;
+
+			//addButton();
 			//GameEvents.onGUIApplicationLauncherReady.Add(addButton);
 			//GameEvents.onGUIApplicationLauncherUnreadifying.Add(rbEvent);
 		}
@@ -81,6 +91,12 @@ namespace HeatWarning
 			GameEvents.onGUIApplicationLauncherUnreadifying.Remove(rbEvent);
 			removeButton();
 		}*/
+
+		private void addButtonEvent(object source, ElapsedEventArgs e)
+		{
+			addButton();
+		}
+
 		public void FixedUpdate()
 		{
 			if (menuButton && ApplicationLauncher.Ready)
@@ -129,6 +145,10 @@ namespace HeatWarning
 						visibleInScenes, //The scenes this button will be visible in.
 						menuButtonTexture //A 38x38 Texture oboect.
 					);
+					if (tmrMakeButtonTimer.Enabled)
+					{
+						tmrMakeButtonTimer.Enabled = false;
+					}
 					Debug.Log("[HeatWarning] Config button added.");
 				}
 			}
@@ -138,14 +158,21 @@ namespace HeatWarning
 		}
 		public void removeButton()
 		{
-			if (ApplicationLauncher.Ready)
-			{
+			//if (ApplicationLauncher.Ready)
+			//{
 				if (menuButton)
 				{
-					ApplicationLauncher.Instance.RemoveModApplication(menuButton);
-					menuButton = null;
+					try{
+						ApplicationLauncher.Instance.RemoveModApplication(menuButton);
+						menuButton = null;
+					}
+					catch (Exception e)
+					{
+						Debug.Log("[HeatWarning] There was an exception attempting to remove the applauncher button. Exception type follows...");
+						Debug.Log("[HeatWarning] " + e.Message);
+					}
 				}
-			}
+			//}
 		}
 		public void draw(int windowID)
 		{
