@@ -3,7 +3,7 @@ This mod will blast a quite loud audio warning at you when any part of the curre
 
 A critical warning occurs at 90%. You can cancel the audible alarm with an ApplicationLauncher button.
 
-Binary package with assets available from Curseforge here: http://kerbal.curseforge.com/ksp-mods/229928-heatwarning or from http://greenoctagon.co.uk/HeatWarning.zip
+Binary package with assets available from Curseforge here: http://kerbal.curseforge.com/ksp-mods/229928-heatwarning or from http://greenoctagon.co.uk/HeatWarning1.1.103.zip
 
 To install the binary package, copy the HeatWarning directory in the zip, into your KSP installation's GameData directory.
 
