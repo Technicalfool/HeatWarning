@@ -635,6 +635,15 @@ namespace HeatWarning{
 			if (options[MenuOptions.AUDIO] && options[MenuOptions.ENABLED])
 			{
 				/*
+				 * Set volume to ship volume setting, if GameSettings
+				 * instance is ready to be used.
+				 */
+				if (GameSettings.Ready)
+				{
+					src.volume = GameSettings.SHIP_VOLUME;
+					criticalSrc.volume = GameSettings.SHIP_VOLUME;
+				}
+				/*
 				 * Move the sound to the position of the active vessel.
 				 * There's probably a better way to keep the sound central.
 				 */
